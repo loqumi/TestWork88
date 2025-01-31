@@ -3,11 +3,13 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import {CurrentWeather, getCurrentWeather} from '@/services/weather';
 import { WeatherCard } from '@/components/WeatherCard';
+import { useFavoritesStore } from '@/stores/favorites';
 
 export default function Home() {
   const [city, setCity] = useState('');
   const [weather, setWeather] = useState<CurrentWeather | null>(null);
   const [loading, setLoading] = useState(false);
+  const { addCity, cities } = useFavoritesStore();
   const router = useRouter();
 
   const handleSearch = async () => {
@@ -52,6 +54,17 @@ export default function Home() {
               <div className="col-md-6">
                 <WeatherCard weather={weather} />
                 <div className="mb-3 gap-3 d-flex">
+                  <button
+                      className="btn btn-success"
+                      onClick={() => addCity({
+                        id: `${weather.name}-${weather.sys.country}`,
+                        name: weather.name,
+                        country: weather.sys.country
+                      })}
+                      disabled={cities.some(c => c.id === `${weather.name}-${weather.sys.country}`)}
+                  >
+                    Add to Favorites
+                  </button>
                   <button
                       className="btn btn-info"
                       onClick={() => router.push(`/forecast/${weather.name}`)}
