@@ -38,3 +38,10 @@ export const getCurrentWeather = async (city: string) => {
     );
     return response.data;
 };
+
+export const getForecast = async (city: string) => {
+    const response = await axios.get<{ list: ForecastItem[] }>(
+        `${BASE_URL}/forecast?q=${city}&units=metric&appid=${API_KEY}`
+    );
+    return response.data.list;
+};

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import {CurrentWeather, getCurrentWeather} from '@/services/weather';
 import { WeatherCard } from '@/components/WeatherCard';
@@ -7,6 +8,7 @@ export default function Home() {
   const [city, setCity] = useState('');
   const [weather, setWeather] = useState<CurrentWeather | null>(null);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleSearch = async () => {
     if (!city) return;
@@ -49,6 +51,14 @@ export default function Home() {
             <div className="row">
               <div className="col-md-6">
                 <WeatherCard weather={weather} />
+                <div className="mb-3 gap-3 d-flex">
+                  <button
+                      className="btn btn-info"
+                      onClick={() => router.push(`/forecast/${weather.name}`)}
+                  >
+                    5-Day Forecast
+                  </button>
+                </div>
               </div>
             </div>
         ) : <div className="text-center">There are no content let`s find it!</div>}
