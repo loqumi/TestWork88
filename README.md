@@ -16,6 +16,12 @@ You can find your API key there [openweathermap](https://openweathermap.org/api)
 
 ### And finally
 
+```bash
+npm run dev
+# or
+yarn run dev
+```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 
