@@ -1,2 +1,48 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'react-toastify/dist/ReactToastify.css';
+
+.weather-icon {
+  width: 100px;
+  height: 100px;
+}
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #212529;
+  --card-bg: #f8f9fa;
+}
+
+[data-theme="dark"] {
+  --bg-color: #2d333b;
+  --text-color: #adbac7;
+  --card-bg: #373e47;
+}
+
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+.card {
+  background: var(--card-bg);
+  transition: transform 0.2s;
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
+
+.weather-card-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.weather-card-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.3s ease;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
